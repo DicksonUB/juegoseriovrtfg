@@ -1,14 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public Door[] doors;
-    public MeshCollider meshCollider;
+    public Doorway[] doorways;
+    public Collider boxCollider;
+    public Collider[] compoundCollider;
+    public bool compound;
+    public Bounds roomBounds;
 
-    public Bounds RoomBounds
+    public Bounds getRoomBounds()
     {
-        get { return meshCollider.bounds; }
+
+
+        return boxCollider.bounds;
+
+
     }
+
 }

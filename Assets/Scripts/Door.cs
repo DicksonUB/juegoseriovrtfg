@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private void OnDrawGizmos()
+    // Start is called before the first frame update
+    void Start()
     {
-        Ray ray = new Ray(transform.position, transform.rotation * Vector3.forward);
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(ray);
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
