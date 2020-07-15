@@ -8,7 +8,11 @@ public class CameraRaycasting : MonoBehaviour
 
     private IInteractable currentTarget;
     [SerializeField] private Camera mainCamera;
-   
+    public LayerMask mask;
+    private void Start()
+    {
+        mask = LayerMask.GetMask("Door");
+    }
     private void Update()
     {
         RaycastForInteractable();
@@ -26,7 +30,7 @@ public class CameraRaycasting : MonoBehaviour
 
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast(ray,out whatIHit,range))
+        if(Physics.Raycast(ray,out whatIHit,mask))
         {
             IInteractable interactable = whatIHit.collider.GetComponent<IInteractable>();
 

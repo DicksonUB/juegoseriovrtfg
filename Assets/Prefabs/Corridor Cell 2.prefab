@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6663867219164007115}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 2.5, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2935075169969682706}
@@ -96,10 +96,6 @@ MonoBehaviour:
   - {fileID: 43508899119379350}
   boxCollider: {fileID: 2994611042582255573}
   compoundCollider: []
-  compound: 0
-  roomBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!65 &2994611042582255573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -180,7 +176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8197901118538437577}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 27566427400281154}
@@ -277,7 +273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 494274, guid: 03456f4f7ff12804f8c4cf79101c25f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.642
+      value: 0.85800004
       objectReference: {fileID: 0}
     - target: {fileID: 494274, guid: 03456f4f7ff12804f8c4cf79101c25f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -336,7 +332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 494832, guid: 47012c44b00ebe34d80a8935be8e87b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.205
+      value: -0.7049999
       objectReference: {fileID: 0}
     - target: {fileID: 494832, guid: 47012c44b00ebe34d80a8935be8e87b5, type: 3}
       propertyPath: m_LocalPosition.y
