@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - DoorText
+  - Fire
+  - DebugCanvas
   layers:
   - Default
   - TransparentFX
@@ -18,9 +20,9 @@ TagManager:
   - Door
   - Player
   - Enemy
-  - 
-  - 
-  - 
+  - Interactable
+  - PostProcessing
+  - EnemyDoorCollider
   - 
   - 
   - 

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
 	[RequireComponent(typeof(Rigidbody))]

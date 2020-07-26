@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 152338, guid: 15b8f5965d061544594f36ae633a5974, type: 3}
       propertyPath: m_Name
-      value: Light
+      value: Light Variant
       objectReference: {fileID: 0}
     - target: {fileID: 152338, guid: 15b8f5965d061544594f36ae633a5974, type: 3}
       propertyPath: m_StaticEditorFlags
