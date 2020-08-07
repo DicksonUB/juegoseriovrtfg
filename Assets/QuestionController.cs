@@ -139,7 +139,7 @@ public class QuestionController : MonoBehaviour
             time -= Time.deltaTime;
             fillImage.fillAmount = time / duration;
             timeInt = (int)time;
-            secondsLeft.text = timeInt.ToString();
+            secondsLeft.text = timeInt.ToString() + " s.";
             yield return null;
         }
         QuestionNotPassed();
