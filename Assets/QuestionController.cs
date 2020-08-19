@@ -16,13 +16,16 @@ public class QuestionController : MonoBehaviour
     Toggle toggle2;
     Toggle toggle3;
     Toggle toggle4;
-    public Canvas canvas;
+    GameObject canvas;
 
     float durationInSeconds = 600f;
     Image fillImage;
-    private Question question;
+    Question question;
+    GameObject vr_camera;
 
     GameController gc;
+
+    
     public string ActiveToggle()
     {
         if (toggle1 != null && toggle1.isOn)
@@ -47,7 +50,7 @@ public class QuestionController : MonoBehaviour
     }
     public void OnSubmit()
     {
-        if(ActiveToggle() == question.correctAnswer)
+        if(ActiveToggle() == question.answer)
         {
             QuestionPassed();
         }
@@ -59,23 +62,34 @@ public class QuestionController : MonoBehaviour
     
     private void QuestionNotPassed()
     {
+        DeactivateCanvas();
         gc.DeletePart(gameObject);
         
-        Debug.Log("Question not passed");
+        
+       
     }
-    
+    private void DeactivateCanvas()
+    {
+        canvas.GetComponent<Canvas>().enabled = false;
+        
+    }
+    private void ActivateCanvas()
+    {
+        canvas.GetComponent<Canvas>().enabled = true;
+        
+    }
     private void QuestionPassed()
     {
-        
+        DeactivateCanvas();
         gc.FoundObject(gameObject.name,type,gameObject.transform.position,gameObject);
-        
-        Debug.Log("Question passed");
+
     }
     public void CreateCanvas()
     {
         //var canvasInstance = Instantiate(canvas, transform.position, Quaternion.identity);
         //canvasInstance.transform.parent = gameObject.transform;
-
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
+        
         Toggle[] toggles = canvas.GetComponentsInChildren<Toggle>();
         foreach(Toggle t in toggles)
         {
@@ -112,9 +126,8 @@ public class QuestionController : MonoBehaviour
         }
 
         submitButton = canvas.GetComponentInChildren<Button>();
-        Debug.Log(gameObject.name);
-        Debug.Log(canvas.name);
-        submitButton.onClick.AddListener(OnSubmit);
+        
+        
         Image[] images = canvas.GetComponentsInChildren<Image>();
         foreach(Image i in images)
         {
@@ -145,26 +158,47 @@ public class QuestionController : MonoBehaviour
         QuestionNotPassed();
 
     }
-    public void populateCanvas(Question q)
+    public void SetQuestion(Question q)
     {
         question = q;
-        inquiryComponent.text = q.inquiry;
-        toggle1.GetComponentInChildren<TextMeshProUGUI>().text = q.option1;
-        toggle2.GetComponentInChildren<TextMeshProUGUI>().text = q.option2;
-        toggle3.GetComponentInChildren<TextMeshProUGUI>().text = q.option3;
-        if(q.option4 != null)
+    }
+    public void populateCanvas()
+    {
+        inquiryComponent.text = question.inquiry;
+        toggle1.GetComponentInChildren<TextMeshProUGUI>().text = question.option0;
+        toggle2.GetComponentInChildren<TextMeshProUGUI>().text = question.option1;
+        toggle3.GetComponentInChildren<TextMeshProUGUI>().text = question.option2;
+        if(question.option3 != null)
         {
-            toggle4.GetComponentInChildren<TextMeshProUGUI>().text = q.option4;
+            toggle4.GetComponentInChildren<TextMeshProUGUI>().text = question.option3;
         }
 
     }
     public void DisplayCanvas()
     {
-        canvas.gameObject.SetActive(true);
-        
+
+        populateCanvas();
+        vr_camera = GameObject.FindGameObjectWithTag("MainCamera");
+        canvas.transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
+
+        //canvas.transform.LookAt(canvas.transform.position + vr_camera.transform.rotation * Vector3.forward, vr_camera.transform.rotation * Vector3.up);
+        Vector3 difference = vr_camera.transform.position - canvas.transform.position;
+        float rotationY = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;
+        canvas.transform.rotation = Quaternion.Euler(0.0f, rotationY -180,0.0f);
+
+
+
+
+        submitButton.onClick.RemoveAllListeners();
+        submitButton.onClick.AddListener(OnSubmit);
+        ActivateCanvas();
+
     }
+
     void Start()
     {
         gc = FindObjectOfType<GameController>();
+        //canvas = FindObjectOfType<Canvas>();
+        
     }
 }

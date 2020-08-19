@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             ani.SetFloat("speed", 0);
-            //GameOver();
+            GameOver();
             character.Move(Vector3.zero, false, false);
         }
 
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     }
     private void GameOver()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
 }

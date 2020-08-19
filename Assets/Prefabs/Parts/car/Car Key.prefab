@@ -1,5 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!54 &2913908983137446503
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636279536823634869}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2243075020352882498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636279536823634869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1452698, y: 0.75361323, z: 0.34785154}
+  m_Center: {x: 2.3695495, y: -1.084367, z: 0.27676395}
+--- !u!114 &3077678137063731590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636279536823634869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c72d6fcb089cf48ba4ec476b5538f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Car
 --- !u!1 &4417248986736269666
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,50 +115,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_CustomReticle: {fileID: 0}
-  player: {fileID: 0}
---- !u!54 &2913908983137446503
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7636279536823634869}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &2243075020352882498
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7636279536823634869}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1452698, y: 0.75361323, z: 0.34785154}
-  m_Center: {x: 2.3695495, y: -1.084367, z: 0.27676395}
---- !u!114 &3077678137063731590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7636279536823634869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05c72d6fcb089cf48ba4ec476b5538f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: Car
-  canvas: {fileID: 4229235329636792792}
 --- !u!1001 &1934417887170810556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,12 +200,12 @@ PrefabInstance:
     - target: {fileID: -1617365279978105996, guid: 3a344f68f1714ab448a42ef16b270095,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2604
+      value: 0.057
       objectReference: {fileID: 0}
     - target: {fileID: -1617365279978105996, guid: 3a344f68f1714ab448a42ef16b270095,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0128
+      value: 0.022
       objectReference: {fileID: 0}
     - target: {fileID: -1617365279978105996, guid: 3a344f68f1714ab448a42ef16b270095,
         type: 3}
@@ -302,12 +300,12 @@ PrefabInstance:
     - target: {fileID: 8493645322332021312, guid: 3a344f68f1714ab448a42ef16b270095,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9545
+      value: -0.24882214
       objectReference: {fileID: 0}
     - target: {fileID: 8493645322332021312, guid: 3a344f68f1714ab448a42ef16b270095,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.86581
+      value: 0.16899224
       objectReference: {fileID: 0}
     - target: {fileID: 8493645322332021312, guid: 3a344f68f1714ab448a42ef16b270095,
         type: 3}
@@ -603,7 +601,7 @@ PrefabInstance:
     - target: {fileID: 7091423643348610785, guid: aebe4eabb90ff01439b33ff4f6fed704,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7091423643348610785, guid: aebe4eabb90ff01439b33ff4f6fed704,
         type: 3}
@@ -842,9 +840,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aebe4eabb90ff01439b33ff4f6fed704, type: 3}
---- !u!223 &4229235329636792792 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 7091423643348610797, guid: aebe4eabb90ff01439b33ff4f6fed704,
-    type: 3}
-  m_PrefabInstance: {fileID: 6402024258227263285}
-  m_PrefabAsset: {fileID: 0}

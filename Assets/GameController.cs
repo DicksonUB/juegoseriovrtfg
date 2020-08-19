@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     List<Question> questions = null;
+    List<Question> questionsGame = null;
     
     
     private List<List<GameObject>> parts;
@@ -46,6 +47,7 @@ public class GameController : MonoBehaviour
     public GameObject exitButtonDoor;
     public GameObject exitButtonHelicopter;
 
+    public AudioSource audio;
     // Start is called before the first frame update
     void Start() 
     {
@@ -186,10 +188,21 @@ public class GameController : MonoBehaviour
                 break;
 
         }
+        StartCoroutine(PartAdquired());
         Destroy(go);
         
         
 
+    }
+    IEnumerator PartAdquired()
+    {
+        string url = "https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q=SampleText&tl=En-gb";
+        WWW www = new WWW(url);
+
+        yield return www;
+
+        audio.clip = www.GetAudioClip(false, true, AudioType.MPEG);
+        audio.Play();
     }
     public void CheckForWin()
     {
@@ -215,28 +228,39 @@ public class GameController : MonoBehaviour
     }
     public void Win()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     public void PlaceParts() 
     {
         int i;
+        questions = Questions.getQuestions();
+        List<Question> questionsCopy = questions;
         foreach (List<GameObject> list in parts)
         {
             if (list.Count >= 1)
             {
-                
                 GameObject g = list[Random.Range(0, list.Count)];
                 g.SetActive(true);
-                Question q = new Question("What is the powerhouse of the cell?", "The ribosomes", "The nucleus", "The mitochondria", "The cytoplasm", "3");
 
                 QuestionController qc = g.GetComponent<QuestionController>();
+                
                 qc.CreateCanvas();
-                qc.populateCanvas(q);
-
+                int pos = Random.Range(0, questionsCopy.Count);
+                qc.SetQuestion(questionsCopy[pos]);
+                questionsGame.Add(questionsCopy[pos]);
+                questionsCopy.RemoveAt(pos);
             }
         }
     }
-   
+    public void ResetQuestions() 
+    {
+        questions = null;
+    }
+    public void AddQuestion(Question q)
+    {
+        questions.Add(q);
+    }
+
     public void DeletePart(GameObject go) 
     {
         Destroy(go);
@@ -257,36 +281,3 @@ public class GameController : MonoBehaviour
         
     }
 }   
-
-[System.Serializable]
-public class Question
-{
-    public string inquiry;
-    public string option1;
-    public string option2;
-    public string option3;
-    public string option4;
-    public string correctAnswer;
-
-    public Question(string inquiry, string option1, string option2, string option3, string option4, string correctAnswer)
-    {
-        this.inquiry = inquiry;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.correctAnswer = correctAnswer;
-    }
-    public Question(string inquiry, string option1, string option2, string option3, string correctAnswer)
-    {
-        this.inquiry = inquiry;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.correctAnswer = correctAnswer;
-    }
-    public override string ToString()
-    {
-        return inquiry + "\n" + "1)" + option1 + "\n" + "2)" + option2 + "\n" + "3)" + option3 + "\n" + "4)" + option4 + "\n";
-    }
-}
