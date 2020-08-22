@@ -7,7 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PartInteractable : XRBaseInteractable
 {
     private XRBaseInteractor hoverInteractor = null;
-    QuestionController qc;
+    PartController pc;
     
 
 
@@ -18,13 +18,13 @@ public class PartInteractable : XRBaseInteractable
         onHoverExit.AddListener(ObjectDeHovered);
         onSelectEnter.AddListener(ObjectSelected);
         onSelectExit.AddListener(ObjectDeselected);
-        qc = GetComponent<QuestionController>();
+        pc = GetComponent<PartController>();
         
     }
     private void ObjectSelected(XRBaseInteractor interactor)
     {
         
-        qc.DisplayCanvas();
+        pc.DisplayCanvas(new Vector3(transform.position.x, 2.5f, transform.position.z));
     }
     private void ObjectDeselected(XRBaseInteractor interactor)
     {

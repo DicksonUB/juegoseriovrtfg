@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Threading;
 
-public class QuestionController : MonoBehaviour
+public abstract class QuestionController : MonoBehaviour
 {
     TextMeshProUGUI inquiryComponent;
     TextMeshProUGUI secondsLeft;
@@ -18,39 +18,43 @@ public class QuestionController : MonoBehaviour
     Toggle toggle4;
     GameObject canvas;
 
-    float durationInSeconds = 600f;
+    float durationInSeconds = 60f;
     Image fillImage;
     Question question;
     GameObject vr_camera;
 
-    GameController gc;
+    protected GameController gc;
 
     
     public string ActiveToggle()
     {
         if (toggle1 != null && toggle1.isOn)
         {
-            return "1";
+            return "A";
         }
         else if (toggle2 != null && toggle2.isOn)
         {
-            return "2";
+            return "B";
         }
         else if (toggle3 != null && toggle3.isOn)
         {
-            return "3";
+            return "C";
             
         }
         else if (toggle4 != null && toggle4.isOn)
         {
-            return "4";
+            return "D";
             
         }
         return "-1";
     }
     public void OnSubmit()
     {
-        if(ActiveToggle() == question.answer)
+        /*
+        GameObject debugCanvas = GameObject.FindGameObjectWithTag("DebugCanvas");
+        debugCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "YES";
+        */
+        if (ActiveToggle() == question.answer)
         {
             QuestionPassed();
         }
@@ -59,31 +63,20 @@ public class QuestionController : MonoBehaviour
             QuestionNotPassed();
         }
     }
-    
-    private void QuestionNotPassed()
-    {
-        DeactivateCanvas();
-        gc.DeletePart(gameObject);
-        
-        
-       
-    }
-    private void DeactivateCanvas()
+
+    public abstract void QuestionNotPassed();
+    protected void DeactivateCanvas()
     {
         canvas.GetComponent<Canvas>().enabled = false;
         
     }
-    private void ActivateCanvas()
+    protected void ActivateCanvas()
     {
         canvas.GetComponent<Canvas>().enabled = true;
         
     }
-    private void QuestionPassed()
-    {
-        DeactivateCanvas();
-        gc.FoundObject(gameObject.name,type,gameObject.transform.position,gameObject);
-
-    }
+    public abstract void QuestionPassed();
+    
     public void CreateCanvas()
     {
         //var canvasInstance = Instantiate(canvas, transform.position, Quaternion.identity);
@@ -171,15 +164,17 @@ public class QuestionController : MonoBehaviour
         if(question.option3 != null)
         {
             toggle4.GetComponentInChildren<TextMeshProUGUI>().text = question.option3;
+            toggle4.gameObject.SetActive(false);
         }
 
     }
-    public void DisplayCanvas()
+    public void DisplayCanvas(Vector3 position)
     {
-
+        canvas.GetComponent<CustomRenderQueue>().enabled = true;
         populateCanvas();
+        durationInSeconds = 60f;
         vr_camera = GameObject.FindGameObjectWithTag("MainCamera");
-        canvas.transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
+        canvas.transform.position = position;
 
         //canvas.transform.LookAt(canvas.transform.position + vr_camera.transform.rotation * Vector3.forward, vr_camera.transform.rotation * Vector3.up);
         Vector3 difference = vr_camera.transform.position - canvas.transform.position;
@@ -199,6 +194,5 @@ public class QuestionController : MonoBehaviour
     {
         gc = FindObjectOfType<GameController>();
         //canvas = FindObjectOfType<Canvas>();
-        
     }
 }

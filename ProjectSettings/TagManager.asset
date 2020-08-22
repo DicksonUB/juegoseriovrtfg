@@ -8,6 +8,8 @@ TagManager:
   - Fire
   - DebugCanvas
   - Canvas
+  - Locker
+  - Crosshair
   layers:
   - Default
   - TransparentFX

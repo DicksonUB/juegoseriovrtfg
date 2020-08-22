@@ -17,17 +17,32 @@ public class PlayerController : MonoBehaviour
     public Animator ani;
 
     public GameObject player;
+    public bool chasing;
+    private Vector3 startingPosition;
     void Start()
     {
         agent.updateRotation = false;
-        
+        chasing = true;
+        startingPosition = new Vector3(-65.388f, 1.662f, 19.911f);
+
+    }
+    public void SetChasing(bool value)
+    {
+        chasing = value;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        agent.SetDestination(player.transform.position);
+        if (chasing)
+        {
+            agent.SetDestination(player.transform.position);
+        }
+        else
+        {
+            agent.SetDestination(startingPosition);
+        }
+        
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             character.Move(agent.desiredVelocity, false, false);
@@ -36,15 +51,19 @@ public class PlayerController : MonoBehaviour
         else
         {
             ani.SetFloat("speed", 0);
-            GameOver();
             character.Move(Vector3.zero, false, false);
         }
-
-
+    }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Equals("XR Rig"))
+        {
+            //GameOver();
+        }
     }
     private void GameOver()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("EndScreenGameOver");
     }
 
 }

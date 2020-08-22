@@ -10,9 +10,6 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     List<Question> questions = null;
-    List<Question> questionsGame = null;
-    
-    
     private List<List<GameObject>> parts;
     public List<GameObject> carKeys;
     public List<GameObject> carGas;
@@ -26,12 +23,9 @@ public class GameController : MonoBehaviour
     public List<GameObject> doorFakeIds;
     public List<GameObject> doorMasks;
     public List<GameObject> doorLuggages;
-    public GameObject progressCar;
-    Transform [] progressCarParts;
-    public GameObject progressDoor;
-    Transform [] progressDoorParts;
-    public GameObject progressHelicopter;
-    Transform [] progressHelicopterParts;
+    public List<GameObject> lockers;
+    public List<GameObject> vents;
+
     public GameObject progressCarStatic;
     Transform [] progressCarPartsStatic;
     public GameObject progressDoorStatic;
@@ -43,24 +37,25 @@ public class GameController : MonoBehaviour
     int numberOfPartsDoor;
     int numberOfPartsHelicopter;
 
+    public GameObject player;
     public GameObject exitButtonCar;
     public GameObject exitButtonDoor;
     public GameObject exitButtonHelicopter;
-
+    public AudioSource music;
     public AudioSource audio;
+
     // Start is called before the first frame update
     void Start() 
     {
         
-        progressCarParts = progressCar.GetComponentsInChildren<Transform>(true);
-        progressDoorParts = progressDoor.GetComponentsInChildren<Transform>(true);
-        progressHelicopterParts = progressHelicopter.GetComponentsInChildren<Transform>(true);
+        
         progressCarPartsStatic = progressCarStatic.GetComponentsInChildren<Transform>(true);
         progressDoorPartsStatic = progressDoorStatic.GetComponentsInChildren<Transform>(true);
         progressHelicopterPartsStatic = progressHelicopterStatic.GetComponentsInChildren<Transform>(true);
+
+
         
 
-       
         parts = new List<List<GameObject>>();
         
         parts.Add(carKeys);
@@ -77,36 +72,24 @@ public class GameController : MonoBehaviour
         parts.Add(doorLuggages);
         
         questions = new List<Question>();
+        questions = Questions.getQuestions();
+        
         PlaceParts();
         numberOfPartsCar = 0;
         numberOfPartsDoor= 0;
         numberOfPartsHelicopter = 0;
-
+        
 
 
 
     }
     public void FoundObject(string objectName,string objectType,Vector3 spawnPosition,GameObject go)
     {
-        
+
         
         switch (objectType)
         {
             case "Car":
-                progressCar.gameObject.SetActive(true);
-                progressCar.gameObject.transform.position = spawnPosition;
-                foreach (Transform part in progressCarParts)
-                {
-                    if (part.gameObject.name.Equals("Shaded " + SanitazeName(objectName)))
-                    {
-                        part.gameObject.SetActive(false);
-                    }                    
-                    if (part.gameObject.name.Equals(SanitazeName(objectName)))
-                    {
-                        part.gameObject.SetActive(true);
-
-                    }
-                }
                 foreach (Transform partStatic in progressCarPartsStatic)
                 {
                     if (partStatic.gameObject.name.Equals("Shaded " + SanitazeName(objectName)))
@@ -123,24 +106,10 @@ public class GameController : MonoBehaviour
                 CheckForWin();
                 break;
             case "Door":
-                /*
-                GameObject debugCanvas = GameObject.FindGameObjectWithTag("DebugCanvas");
-                debugCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "IN";
-                */
-                progressDoor.gameObject.SetActive(true);
-                progressDoor.gameObject.transform.position = spawnPosition;
-                foreach (Transform part in progressDoorParts)
-                {
-                    if (part.gameObject.name.Equals("Shaded " + SanitazeName(objectName)))
-                    {
-                        part.gameObject.SetActive(false);
-                    }
-                    if (part.gameObject.name.Equals(SanitazeName(objectName)))
-                    {
-                        part.gameObject.SetActive(true);
-
-                    }
-                }
+                
+                
+                
+                
                 foreach (Transform partStatic in progressDoorPartsStatic)
                 {
                     if (partStatic.gameObject.name.Equals("Shaded " + SanitazeName(objectName)))
@@ -157,20 +126,6 @@ public class GameController : MonoBehaviour
                 CheckForWin();
                 break;
             case "Helicopter":
-                progressHelicopter.gameObject.SetActive(true);
-                progressHelicopter.gameObject.transform.position = spawnPosition;
-                foreach (Transform part in progressHelicopterParts)
-                {
-                    if (part.gameObject.name.Equals("Shaded " + SanitazeName(objectName)))
-                    {
-                        part.gameObject.SetActive(false);
-                    }
-                    if (part.gameObject.name.Equals(SanitazeName(objectName)))
-                    {
-                        part.gameObject.SetActive(true);
-
-                    }
-                }
                 foreach (Transform partStatic in progressHelicopterPartsStatic)
                 {
                     if (partStatic.gameObject.name.Equals("Shaded " + SanitazeName(objectName)))
@@ -188,21 +143,48 @@ public class GameController : MonoBehaviour
                 break;
 
         }
+        StartCoroutine(WaitAndMove(1, go,go.transform.position, player.transform.position));
         StartCoroutine(PartAdquired());
+        
+    }
+    
+    
+    IEnumerator WaitAndMove(float delayTime,GameObject go,Vector3 posA,Vector3 posB)
+    {
+        yield return new WaitForSeconds(delayTime); // start at time X
+        float startTime = Time.time; // Time.time contains current frame time, so remember starting point
+        while (Time.time - startTime <= 2)
+        { // until one second passed
+            go.transform.position = Vector3.Lerp(posA, posB, Time.time - startTime); // lerp from A to B in one second
+            yield return 1; // wait for next frame
+        }
         Destroy(go);
-        
-        
-
     }
     IEnumerator PartAdquired()
     {
-        string url = "https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q=SampleText&tl=En-gb";
+        
+        string url = "https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q=New%20part&tl=En-gb";
         WWW www = new WWW(url);
 
         yield return www;
 
         audio.clip = www.GetAudioClip(false, true, AudioType.MPEG);
+        music.Pause();
         audio.Play();
+        music.Play();
+    }
+    IEnumerator PartLost()
+    {
+
+        string url = "https://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q=Part%20lost&tl=En-gb";
+        WWW www = new WWW(url);
+
+        yield return www;
+
+        audio.clip = www.GetAudioClip(false, true, AudioType.MPEG);
+        music.Pause();
+        audio.Play();
+        music.Play();
     }
     public void CheckForWin()
     {
@@ -232,24 +214,91 @@ public class GameController : MonoBehaviour
     }
     public void PlaceParts() 
     {
-        int i;
-        questions = Questions.getQuestions();
-        List<Question> questionsCopy = questions;
+        int i; 
+      
         foreach (List<GameObject> list in parts)
         {
             if (list.Count >= 1)
             {
-                GameObject g = list[Random.Range(0, list.Count)];
+                GameObject g = list[Random.Range(0, list.Count-1)];
                 g.SetActive(true);
-
-                QuestionController qc = g.GetComponent<QuestionController>();
-                
-                qc.CreateCanvas();
-                int pos = Random.Range(0, questionsCopy.Count);
-                qc.SetQuestion(questionsCopy[pos]);
-                questionsGame.Add(questionsCopy[pos]);
-                questionsCopy.RemoveAt(pos);
+                PartController pc = g.GetComponent<PartController>();                
+                pc.CreateCanvas();
+                int pos = Random.Range(0, questions.Count-1);
+                pc.SetQuestion(questions[pos]);
+                questions.RemoveAt(pos);
             }
+        }
+        PlaceCounters();
+    }
+    
+    public void PlaceCounters()
+    {
+        /*
+        List<GameObject>lockersCopy = lockers;
+        List<GameObject>ventsCopy = vents;
+        */
+        int pos;
+
+        // We reset to all the questions again
+        //CopyList(questionsCopy, questions);
+        
+        List<GameObject> ventsActive = new List<GameObject>();
+        for (int i = 0; i < 6; i++)
+        {
+            
+            if (questions.Count > 0) 
+            {
+                if(lockers.Count > 1)
+                {
+                    pos = Random.Range(0, lockers.Count - 1);
+                    GameObject g = lockers[pos];
+                    g.SetActive(true);
+                    lockers.RemoveAt(pos);
+
+                    CounterController cc = g.GetComponent<CounterController>();
+                    cc.CreateCanvas();
+                    pos = Random.Range(0, questions.Count - 1);
+                    cc.SetQuestion(questions[pos]);
+                    questions.RemoveAt(pos);
+                }
+            }
+           
+            if (questions.Count > 0)
+            {             
+                pos = Random.Range(0, questions.Count - 1);
+                Question q = questions[pos];
+                questions.RemoveAt(pos);
+                
+                for (int j = 0; j < 2; j++)
+                {
+                    if (vents.Count > 0)
+                    {
+                        pos = Random.Range(0, vents.Count - 1);
+
+                        GameObject g = vents[pos];
+                        g.SetActive(true);
+                        vents.RemoveAt(pos);
+
+                        CounterController cc = g.GetComponent<CounterController>();
+                        cc.CreateCanvas();
+                        cc.SetQuestion(q);
+                        ventsActive.Add(g);
+                    }
+                }
+                
+            }
+            
+        }
+       
+        for (int i = 0; i < (ventsActive.Count/2); i++)
+        {
+            
+            GameObject g1=ventsActive[2 * i];
+            GameObject g2=ventsActive[2 * i+1];
+            
+            g1.GetComponent<Vent>().SetOppositeVent(g2.transform.position);
+            g2.GetComponent<Vent>().SetOppositeVent(g1.transform.position);
         }
     }
     public void ResetQuestions() 
@@ -264,6 +313,7 @@ public class GameController : MonoBehaviour
     public void DeletePart(GameObject go) 
     {
         Destroy(go);
+        StartCoroutine(PartLost());
     }
     private string SanitazeName(string objectName)
     {
@@ -272,12 +322,8 @@ public class GameController : MonoBehaviour
                           where char.IsLetter(c)
                           select c
                ).ToArray());
-        Debug.Log(str);
+        
         return str;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }   
