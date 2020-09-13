@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ColliderDoor" Collapsed="true">
+    <Position X="11.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ColliderDoor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="doorController" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CounterController" Collapsed="true">
+    <Position X="11.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAICAAAAAAAJAAAAQAAAAABAAAAAAAEAAI=</HashCode>
+      <FileName>Assets\Scripts\CounterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CounterInteractable" Collapsed="true">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEAAAAAQAAAAAAAAAAAAAAAAAAAEgAIQAAAIAAEA=</HashCode>
+      <FileName>Assets\Scripts\CounterInteractable.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="cc" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CustomRenderQueue" Collapsed="true">
+    <Position X="6.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAACAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CustomRenderQueue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EndScreen" Collapsed="true">
+    <Position X="8" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAABAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\EndScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyController" Collapsed="true">
+    <Position X="6.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIhCAAACAAAQAAAAAAAEAAAAAAAAAJAAAAAEACAAA=</HashCode>
+      <FileName>Assets\Scripts\EnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FirebaseController" Collapsed="true">
+    <Position X="9" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAIAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\FirebaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameController" Collapsed="true">
+    <Position X="10" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAEwaATEBJ8gEAGFBAJIAwQAAABAgAAOEBAJQA=</HashCode>
+      <FileName>Assets\Scripts\GameController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="questions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Menu" Collapsed="true">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACBAABYCAAAAAAAAAAIAAAIABQAAAACAAAI=</HashCode>
+      <FileName>Assets\Scripts\Menu.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fc" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MovementProvider" Collapsed="true">
+    <Position X="6.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABAAAAgiAAAAAQQAAAAACAAAAAAQAAAAAAAAIEAkA=</HashCode>
+      <FileName>Assets\Scripts\MovementProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PartController" Collapsed="true">
+    <Position X="11.25" Y="8" Width="1.5" />
+    <InheritanceLine Type="QuestionController" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="14.75" Y="7.688" />
+        <Point X="13.515" Y="7.687" Type="JumpStart" />
+        <Point X="13.348" Y="7.688" Type="JumpEnd" />
+        <Point X="12" Y="7.688" />
+        <Point X="12" Y="8" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PartController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PartInteractable" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACABAAAAAAQAAAAAAAAAAAAAAAAAAAEgAIQAAAIAAEA=</HashCode>
+      <FileName>Assets\Scripts\PartInteractable.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pc" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Question" Collapsed="true">
+    <Position X="9" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAHhAAAAAAAI=</HashCode>
+      <FileName>Assets\Scripts\Question.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuestionController" Collapsed="true">
+    <Position X="14.75" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAABAEHACoYAACABAAABAACEQQtAAAAAAAAAAIEAAA=</HashCode>
+      <FileName>Assets\Scripts\QuestionController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gc" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Questions" Collapsed="true">
+    <Position X="6.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAgQAAAAASAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Questions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="questions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Vent" Collapsed="true">
+    <Position X="8" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Vent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoorInteractable" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAFAAAAAAAAAAAQACAAAAAAKgAIAQAAgISEAQIAAEA=</HashCode>
+      <FileName>Assets\Scripts\DoorInteractable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.XR.Interaction.Toolkit.XRBaseInteractable" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
