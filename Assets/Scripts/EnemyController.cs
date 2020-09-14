@@ -44,6 +44,7 @@ public class EnemyController : MonoBehaviour
         {
             character.Move(agent.desiredVelocity, false, false);
             ani.SetFloat("speed", 1);
+
         }
         else
         {

@@ -14,9 +14,10 @@ public static class Questions
 
         if(questions == null || questions.Count == 0)
         {
-            
+            bool a = (questions == null);
+            bool b = (questions.Count == 0);
             defaultQuestions = new List<Question>();
-            Question q = new Question("A", "B", "C", "C", "Example question:Press C");
+            Question q = new Question(a.ToString(),b.ToString() , "C", "C", "Example question:Press C");
             for (int i = 0; i < 28; i++)
             {
                 defaultQuestions.Add(q);

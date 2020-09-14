@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour
         parts.Add(doorLuggages);
         
         questions = new List<Question>();
-        questions = Questions.getQuestions();
+        DeepCopyList(questions);
         
         PlaceParts();
         numberOfPartsCar = 0;
@@ -83,6 +83,24 @@ public class GameController : MonoBehaviour
 
 
 
+    }
+    private void DeepCopyList(List<Question> l)
+    {
+        foreach (Question q in Questions.getQuestions())
+        {
+            if (q.option2 == null)
+            {
+                l.Add(new Question(q.option0, q.option1, q.answer, q.inquiry));
+            }
+            else if(q.option3 == null)
+            {
+                l.Add(new Question(q.option0, q.option1, q.option2, q.answer, q.inquiry));
+            }
+            else
+            {
+                l.Add(new Question(q.option0, q.option1, q.option2, q.option3, q.answer, q.inquiry));
+            }   
+        }
     }
     public void FoundObject(string objectName,string objectType,Vector3 spawnPosition,GameObject go)
     {
@@ -326,5 +344,5 @@ public class GameController : MonoBehaviour
         
         return str;
     }
-    
+
 }   

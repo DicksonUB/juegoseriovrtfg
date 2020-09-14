@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 [System.Serializable]
 public class Question
@@ -10,6 +11,13 @@ public class Question
     public string option3;
     public string answer;
 
+    public Question(string option1, string option2, string correctAnswer, string inquiry)
+    {
+        this.inquiry = inquiry;
+        this.option0 = option1;
+        this.option1 = option2;
+        this.answer = correctAnswer;
+    }
     public Question(string option1, string option2, string option3, string option4, string correctAnswer,string inquiry)
     {
         this.inquiry = inquiry;
